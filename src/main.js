@@ -3,6 +3,19 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-new Vue({
+const app =new Vue({
   render: h => h(App),
-}).$mount('#app')
+  mounted() {
+      console.log('mounted')
+      document.addEventListener('deviceReady', this.onDeviceReady, false)
+  },
+  methods: {
+      onDeviceReady() {
+
+      }
+  }
+})
+
+document.addEventListener(typeof cordova !== "undefined" ? "deviceready" : "DOMContentLoaded", () => {
+    app.$mount('#app')
+});
