@@ -18,5 +18,33 @@ export default {
 </script>
 
 <style>
+  @font-face {
+    font-family: Rubik;
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('fonts/Rubik-Regular.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: Rubik;
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+    src: url('fonts/Rubik-Medium.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: Rubik;
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+    src: url('fonts/Rubik-Light.ttf') format('truetype');
+  }
+
+  #app {
+    font-family: 'Rubik', sans-serif !important;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
 </style>
