@@ -7,15 +7,10 @@ const app =new Vue({
   render: h => h(App),
   mounted() {
       console.log('mounted')
-      document.addEventListener('deviceReady', this.onDeviceReady, false)
   },
-  methods: {
-      onDeviceReady() {
-
-      }
-  }
 })
 
 document.addEventListener(typeof cordova !== "undefined" ? "deviceready" : "DOMContentLoaded", () => {
+    screen.orientation.lock('landscape')
     app.$mount('#app')
 });
