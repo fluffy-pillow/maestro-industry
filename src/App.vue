@@ -167,7 +167,9 @@ export default {
     background: #FBFBFB !important;
   }
 
-  .items-page > .page__content, .items-page > .page__background,  .category-page > .page__content, .category-page > .page__background  {
+  .items-page > .page__content, .items-page > .page__background,
+  .category-page > .page__content, .category-page > .page__background,
+  .manual-page > .page__content, .manual-page > .page__background {
     background: #2B2F89 !important;
   }
   /** pages -- end **/
@@ -195,6 +197,12 @@ export default {
 
   h3 {
     font-size: 16px;
+  }
+
+  p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 24px;
   }
 
 
@@ -243,9 +251,18 @@ export default {
     width: 100%;
   }
 
+  .default-image img {
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
   .portlet-container {
     width: 100%;
     padding: 40px;
+  }
+
+  .aside ~ .grid-item__col {
+    margin-left: 20px;
   }
 
   .portlet-section-header {
@@ -266,6 +283,7 @@ export default {
 
   .scrollable-y {
     overflow-y: scroll;
+    overflow-x: hidden;
   }
 
   .scrollable-hide-scroll::-webkit-scrollbar {
@@ -297,6 +315,10 @@ export default {
     flex-direction: column;
     height: 100%;
     overflow: hidden;
+  }
+
+  .desc {
+
   }
 
 

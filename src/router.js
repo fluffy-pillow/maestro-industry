@@ -6,6 +6,7 @@ import Splashscreen from './pages/Splashscreen';
 import Login from './pages/Login';
 import Items from './pages/Items';
 import CategoryId from './pages/Items/_CategoryId/Index';
+import Manual from './pages/Items/_CategoryId/Manual/Index';
 
 Vue.use(Router);
 
@@ -66,6 +67,17 @@ const router = new Router({
                         onsNavigatorOptions: {animation: 'slide', animationOptions: { duration: 0.2 }}
                     },
 //            beforeEnter: ifAuthenticated,
+                    children: [
+                        {
+                            path: 'manual',
+                            name: 'Manual',
+                            component: {
+                                extends: Manual,
+                                onsNavigatorOptions: {animation: 'slide', animationOptions: { duration: 0.2 }}
+                            },
+//            beforeEnter: ifAuthenticated,
+                        }
+                    ]
                 }
             ]
         }

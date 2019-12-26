@@ -18,9 +18,10 @@
                                         <div class="portlet-section-body">
                                             <div class="flexible-table flexible-table__vertical-items">
                                                 <div class="flexible-table-content">
-                                                    <div class="flexible-table__col link"
+                                                    <router-link class="flexible-table__col link"
                                                                  v-for="(item, key) of items"
                                                                  :key="key"
+                                                                 to="/items/1/manual"
                                                     >
                                                         <div class="flexible-table__col-content">
                                                             <div class="flexible-table__image">
@@ -30,7 +31,7 @@
                                                                 {{item.title}}
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </router-link>
                                                 </div>
                                             </div>
                                         </div>
