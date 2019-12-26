@@ -5,6 +5,7 @@ import store from './store';
 import Splashscreen from './pages/Splashscreen';
 import Login from './pages/Login';
 import Items from './pages/Items';
+import CategoryId from './pages/Items/_CategoryId/Index';
 
 Vue.use(Router);
 
@@ -56,6 +57,17 @@ const router = new Router({
                 onsNavigatorOptions: {animation: 'none'}
             },
 //            beforeEnter: ifAuthenticated,
+            children: [
+                {
+                    path: ':categoryId',
+                    name: 'CategoryId',
+                    component: {
+                        extends: CategoryId,
+                        onsNavigatorOptions: {animation: 'slide', animationOptions: { duration: 0.2 }}
+                    },
+//            beforeEnter: ifAuthenticated,
+                }
+            ]
         }
     ]
 })

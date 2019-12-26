@@ -1,7 +1,8 @@
 <template>
-    <v-ons-page class="items-page">
+    <v-ons-page class="category-page">
         <div class="grid">
             <Header>
+                <v-ons-back-button slot="headerLeft">Назад</v-ons-back-button>
                 <Logo slot="headerCenter"></Logo>
             </Header>
             <main class="main-container">
@@ -14,33 +15,24 @@
                                 </div>
                                 <div class="portlet-body">
                                     <section class="portlet-section">
-                                        <div class="portlet-section-header">
-                                            <h3>Оборудование для обработки листового металла</h3>
-                                        </div>
                                         <div class="portlet-section-body">
-                                            <div class="flexible-table flexible-table__horizontal-items">
+                                            <div class="flexible-table flexible-table__vertical-items">
                                                 <div class="flexible-table-content">
-                                                    <router-link class="flexible-table__col link"
+                                                    <div class="flexible-table__col link"
                                                                  v-for="(item, key) of items"
                                                                  :key="key"
-                                                                 to="/items/1"
                                                     >
                                                         <div class="flexible-table__col-content">
                                                             <div class="flexible-table__image">
-                                                                <img :src="require('@/assets/uploads/item.png')">
+                                                                <img :src="require('@/assets/uploads/item-2.png')">
                                                             </div>
                                                             <div class="flexible-table__title">
                                                                 {{item.title}}
                                                             </div>
                                                         </div>
-                                                    </router-link>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </section>
-                                    <section class="portlet-section">
-                                        <div class="portlet-section-header">
-                                            <h3>Оборудование для обработки металла резанием</h3>
                                         </div>
                                     </section>
                                 </div>
@@ -54,46 +46,31 @@
 </template>
 
 <script>
-    import Header from "@/components/Header";
     import Logo from "@/components/Logo";
+    import Header from "@/components/Header";
     export default {
-        name: "Items",
-        components: {Logo, Header},
+        name: "Index",
+        components: {Header, Logo},
         data () {
             return {
                 items: [
                     {
-                        title: 'Координатно-пробивные прессы'
+                        title: 'Токарный обрабатывающий центр SPECTR. Серия TC-M country'
                     },
                     {
-                        title: 'Листогибочные прессы'
+                        title: 'ФС130МФ3 вертикальный обрабатывающий центр'
                     },
                     {
-                        title: 'Гильотины'
+                        title: 'ФС110МФ3 вертикальный обрабатывающий центр'
                     },
                     {
-                        title: 'Валковые машины'
+                        title: 'ФС85МФ3 вертикальный обрабатывающий центр'
                     },
                     {
-                        title: 'Раскрой листового металла'
+                        title: 'ФС65МФ3 вертикальный обрабатывающий центр'
                     },
                     {
-                        title: 'Гибка листового металла'
-                    },
-                    {
-                        title: 'Токарные станки'
-                    },
-                    {
-                        title: 'Штамповочные прессы'
-                    },
-                    {
-                        title: 'Отрезные станки'
-                    },
-                    {
-                        title: 'Установки гиброабразивной резки'
-                    },
-                    {
-                        title: 'Станки БУ'
+                        title: 'МФЦ650 пятиосевой обрабатывающий центр'
                     },
                 ]
             }

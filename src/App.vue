@@ -21,6 +21,189 @@ export default {
 </script>
 
 <style>
+
+
+  #app {
+    font-family: 'Rubik', sans-serif !important;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+
+
+  /** tables --start **/
+  .flexible-table__horizontal-items .flexible-table__image {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .flexible-table__title {
+    font-size: 16px;
+    line-height: 22px;
+    color: #4B4B4B;
+  }
+
+  .flexible-table__horizontal-items .flexible-table__image img {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .flexible-table__vertical-items  .flexible-table__image {
+    background: #FFFFFF;
+    border: 1px solid #E7E7E7;
+    box-sizing: border-box;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 19px;
+  }
+
+  .flexible-table__vertical-items .flexible-table__title {
+    margin-top: 12px;
+  }
+
+  .flexible-table__horizontal-items .flexible-table__col {
+    margin-left: 18px;
+    width: calc((100%/3) - 18px);
+  }
+
+  .flexible-table__vertical-items .flexible-table__col {
+    width: 280px;
+    margin-left: 30px;
+    margin-top: 24px;
+  }
+
+  .flexible-table__horizontal-items .flexible-table__col-content {
+    display: flex;
+    align-items: center;
+  }
+
+  .flexible-table-content {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+  }
+
+  .flexible-table__horizontal-items .flexible-table-content {
+    margin-left: -32px;
+    margin-top: 12px;
+  }
+
+  .flexible-table__vertical-items .flexible-table-content {
+    margin-left: -30px;
+  }
+
+  .flexible-table {
+    width: 100%;
+  }
+
+  @media (max-width: 940px) {
+    .flexible-table__horizontal-items .flexible-table__col {
+      width: calc((100%/2) - 18px);
+    }
+  }
+  /** tables -- end **/
+
+  /** back button -- start **/
+  .back-button {
+    padding-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  .back-button__label {
+    font-family: 'Rubik', sans-serif !important;
+    font-weight: 400 !important;
+    color: #ffffff !important;
+  }
+
+  .back-button__icon {
+    margin-right: 27px !important;
+    display: flex !important;
+    width: 30px !important;
+    height: 30px !important;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 50%;
+    fill: #ffffff !important;
+  }
+
+  .back-button__icon svg {
+    width: 8px;
+    height: 13px;
+  }
+  /** back button -- end **/
+
+  /** buttons -- start **/
+  .btn {
+    height: 50px;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    border-radius: 16px;
+  }
+
+  .btn-success {
+    color: #ffffff;
+    background: #3DD498;
+  }
+  /** buttons -- end **/
+
+  /** pages -- start **/
+
+  .page > .page__content::-webkit-scrollbar {
+    display: none;
+  }
+  .page > .page__content::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .login-page > .page__content, .login-page > .page__background {
+    background: #FBFBFB !important;
+  }
+
+  .items-page > .page__content, .items-page > .page__background,  .category-page > .page__content, .category-page > .page__background  {
+    background: #2B2F89 !important;
+  }
+  /** pages -- end **/
+
+  /** reset -- start **/
+  button {
+    border: none;
+  }
+
+  button:focus {
+    outline: none !important;
+  }
+
+  h2, h3 {
+    font-weight: 500;
+    line-height: 24px;
+    margin: 0 !important;
+    padding: 0;
+    font-family: 'Rubik', sans-serif !important;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+
+  .link {
+    text-decoration: none;
+  }
+  /** reset -- end **/
+
+  /** fonts -- start **/
   @font-face {
     font-family: Rubik;
     font-weight: 400;
@@ -49,29 +232,9 @@ export default {
     font-display: swap;
     src: url('fonts/Rubik-Light.ttf') format('truetype');
   }
+  /** fonts -- end **/
 
-  #app {
-    font-family: 'Rubik', sans-serif !important;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  .grid {
-    display: flex;
-    flex-direction: column;
-    max-height: 100%;
-    overflow: hidden;
-  }
-
-  .login-page > .page__content, .login-page > .page__background {
-    background: #FBFBFB !important;
-  }
-
-  .items-page > .page__content, .items-page > .page__background {
-      background: #2B2F89 !important;
-  }
-
+  /** layout -- start **/
   .portlet {
     background: #FFFFFF;
     border-top-left-radius: 16px;
@@ -92,11 +255,13 @@ export default {
   .grid-item__row {
     margin-top: 34px;
     display: flex;
+    width: 100%;
   }
 
   .grid-item__col {
-      margin-left: 44px;
-      display: flex;
+    margin-left: 44px;
+    display: flex;
+    width: 100%;
   }
 
   .scrollable-y {
@@ -112,86 +277,12 @@ export default {
   }
 
 
-  .flexible-table__horizontal-items .flexible-table__image {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-left: 14px;
-    margin-right: 14px;
-  }
-
-  .flexible-table__title {
-    font-size: 16px;
-    line-height: 22px;
-    color: #4B4B4B;
-  }
-
-  .flexible-table__horizontal-items .flexible-table__image img {
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .flexible-table__horizontal-items .flexible-table__col {
-    margin-left: 18px;
-    width: calc((100%/3) - 18px);
-  }
-
-  @media (max-width: 940px) {
-    .flexible-table__horizontal-items .flexible-table__col {
-      width: calc((100%/2) - 18px);
-    }
-  }
-
-  .flexible-table__horizontal-items .flexible-table__col-content {
-    display: flex;
-    align-items: center;
-  }
-
-  .flexible-table-content {
-    width: 100%;
-    flex-wrap: wrap;
-    display: flex;
-    margin-top: 12px;
-  }
-
-  .flexible-table__horizontal-items .flexible-table-content {
-    margin-left: -32px;
-  }
-
-  .flexible-table {
-    width: 100%;
-  }
-
   .main-container {
     flex: 1;
     overflow: hidden;
     display: flex;
   }
 
-  .page > .page__content::-webkit-scrollbar {
-    display: none;
-  }
-  .page > .page__content::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  h2, h3 {
-    font-weight: 500;
-    line-height: 24px;
-    margin: 0 !important;
-    padding: 0;
-    font-family: 'Rubik', sans-serif !important;
-  }
-
-  h2 {
-    font-size: 24px;
-  }
-
-  h3 {
-    font-size: 16px;
-  }
-
-  .table-item__horizontal {
-  }
 
   .portlet-header h2, .portlet-section-header h3 {
     color: #4B4B4B;
@@ -201,24 +292,15 @@ export default {
     padding-top: 20px;
   }
 
-  .btn {
-    height: 50px;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
-    border-radius: 16px;
+  .grid {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
   }
 
-  .btn-success {
-    color: #ffffff;
-    background: #3DD498;
-  }
 
-  button {
-    border: none;
-  }
+  /** layout -- end **/
 
-  button:focus {
-    outline: none !important;
-  }
+
 </style>
