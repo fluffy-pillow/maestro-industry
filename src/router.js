@@ -4,7 +4,7 @@ import store from './store';
 
 import Splashscreen from './pages/Splashscreen';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import Items from './pages/Items';
 
 Vue.use(Router);
 
@@ -49,10 +49,10 @@ const router = new Router({
 //            beforeEnter: ifNotAuthenticated,
         },
         {
-            path: '/dashboard',
-            name: 'Dashboard',
+            path: '/items',
+            name: 'Items',
             component: {
-                extends: Dashboard,
+                extends: Items,
                 onsNavigatorOptions: {animation: 'none'}
             },
 //            beforeEnter: ifAuthenticated,

@@ -21,7 +21,8 @@
         },
         created() {
             // TODO: редирект на нужную страницу в зависимости от токена
-            this.$router.push('/login').catch(err => {})
+//            this.$router.push('/login').catch(err => {})
+            this.$router.push('/items').catch(err => {})
         }
     }
 </script>
