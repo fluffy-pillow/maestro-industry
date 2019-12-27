@@ -67,7 +67,7 @@
                         desc: 'В данном разделе содержатся типовые неисправности данного оборудования. В случае, если неполадка не устранена, вы должны вызвать мастера.',
                         class: 'manual-link__purple',
                         iconClass: 'manual-link__icon-alert',
-                        to: '/items/' + this.$route.params.categoryId + '/manual/troubleshooting'
+                        to: '/items/' + this.$route.params.categoryId + '/manual/troubleshooting/index'
                     },
                 ]
             }

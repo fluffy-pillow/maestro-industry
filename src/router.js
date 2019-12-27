@@ -89,7 +89,7 @@ const router = new Router({
 //                                  beforeEnter: ifAuthenticated,
                                 },
                                 {
-                                    path: 'troubleshooting',
+                                    path: 'troubleshooting/:manualSlug',
                                     name: 'Troubleshooting',
                                     component: {
                                         extends: Troubleshooting,

@@ -62,4 +62,9 @@
     background: #4068EC;
     color: #ffffff;
 }
+
+.aside-menu__link--orange {
+    background: #FBBD1C;
+    color: #000000;
+}
 </style>

@@ -149,10 +149,12 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid transparent;
   }
 
   .btn__icon {
     margin-right: 10px;
+    display: flex;
   }
 
   .btn-success {
@@ -167,11 +169,40 @@ export default {
 
   .btn-purple {
     color: #ffffff;
-    background: #6E3AC1
+    background: #6E3AC1;
+  }
+
+  .btn-neutral {
+    color: #4B4B4B;
+    background: #FFFFFF;
+    border: 1px solid #4B4B4B;
+    font-size: 16px;
+    line-height: 14px;
+    font-weight: 400;
+  }
+
+  .btn-grey {
+      background: #4B4B4B;
+      color: #ffffff;
+      font-size: 16px;
+      line-height: 14px;
+      font-weight: 400;
+  }
+
+  .btn-grey-glow {
+      box-shadow: 0px 4px 20px rgba(75, 75, 75, 0.3);
+  }
+
+  .btn-warning-glow {
+      box-shadow: 0px 4px 20px rgba(251, 189, 28, 0.45);
   }
   /** buttons -- end **/
 
   /** pages -- start **/
+
+  .page {
+    height: 100vh !important;
+  }
 
   .page > .page__content::-webkit-scrollbar {
     display: none;
@@ -187,6 +218,7 @@ export default {
   .items-page > .page__content, .items-page > .page__background,
   .category-page > .page__content, .category-page > .page__background,
   .exploitation-page > .page__content, .exploitation-page > .page__background,
+  .troubleshooting-page > .page__content, .troubleshooting-page > .page__background,
   .manual-page > .page__content, .manual-page > .page__background {
     background: #2B2F89 !important;
   }
@@ -270,6 +302,24 @@ export default {
   /** fonts -- end **/
 
   /** layout -- start **/
+  .message {
+    font-size: 16px;
+    line-height: 24px;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 19px;
+    padding-right: 19px;
+    border-radius: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .message-success {
+    background: #3DD498;
+    box-shadow: 0px 0px 20px rgba(61, 212, 152, 0.35);
+    color: #ffffff;
+  }
+
   .portlet {
     background: #FFFFFF;
     border-top-left-radius: 16px;
@@ -286,6 +336,10 @@ export default {
   .portlet-container {
     width: 100%;
     padding: 40px;
+  }
+
+  .portlet-offset {
+    margin-left: 32px;
   }
 
   .aside ~ .grid-item__col {
@@ -311,6 +365,7 @@ export default {
   .scrollable-y {
     overflow-y: auto;
     overflow-x: hidden;
+/*    padding-bottom: env(safe-area-inset-top);*/
   }
 
   .scrollable-hide-scroll::-webkit-scrollbar {
@@ -356,7 +411,6 @@ export default {
   }
 
   .portlet--empty__message-icon-wrapper {
-    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;

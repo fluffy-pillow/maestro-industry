@@ -65,5 +65,6 @@
     margin-left: 20px;
     font-size: 16px;
     line-height: 14px;
+    font-weight: 400;
 }
 </style>
