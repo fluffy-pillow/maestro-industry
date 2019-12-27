@@ -60,14 +60,14 @@
                         desc: 'В данном разделе содержатся текстовые и видеоматериалы, как правильно работать с оборудованием.',
                         class: 'manual-link__blue',
                         iconClass: 'manual-link__icon-instruction',
-                        to: ''
+                        to: '/items/' + this.$route.params.categoryId + '/manual/exploitation/index'
                     },
                     {
                         title: 'Открыть руководство по устранению неполадок оборудования',
                         desc: 'В данном разделе содержатся типовые неисправности данного оборудования. В случае, если неполадка не устранена, вы должны вызвать мастера.',
                         class: 'manual-link__purple',
                         iconClass: 'manual-link__icon-alert',
-                        to: ''
+                        to: '/items/' + this.$route.params.categoryId + '/manual/troubleshooting'
                     },
                 ]
             }

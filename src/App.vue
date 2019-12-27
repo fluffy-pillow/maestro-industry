@@ -146,11 +146,28 @@ export default {
     font-size: 18px;
     line-height: 22px;
     border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn__icon {
+    margin-right: 10px;
   }
 
   .btn-success {
     color: #ffffff;
     background: #3DD498;
+  }
+
+  .btn-warning {
+    color: #000000;
+    background: #FBBD1C;
+  }
+
+  .btn-purple {
+    color: #ffffff;
+    background: #6E3AC1
   }
   /** buttons -- end **/
 
@@ -169,6 +186,7 @@ export default {
 
   .items-page > .page__content, .items-page > .page__background,
   .category-page > .page__content, .category-page > .page__background,
+  .exploitation-page > .page__content, .exploitation-page > .page__background,
   .manual-page > .page__content, .manual-page > .page__background {
     background: #2B2F89 !important;
   }
@@ -208,6 +226,15 @@ export default {
 
   .link {
     text-decoration: none;
+  }
+
+  ul, li {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style-type: none;
   }
   /** reset -- end **/
 
@@ -282,7 +309,7 @@ export default {
   }
 
   .scrollable-y {
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
   }
 
@@ -310,6 +337,13 @@ export default {
     padding-top: 20px;
   }
 
+  .portlet--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
   .grid {
     display: flex;
     flex-direction: column;
@@ -319,6 +353,34 @@ export default {
 
   .desc {
 
+  }
+
+  .portlet--empty__message-icon-wrapper {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portlet--empty__message-icon {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 50px;
+    width: 50px;
+  }
+
+  .portlet--empty__message-text {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 24px;
+    color: #4B4B4B;
+  }
+
+  video {
+    border-radius: 16px;
+    overflow: hidden;
   }
 
 

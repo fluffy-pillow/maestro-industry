@@ -55,4 +55,15 @@
     align-items: center;
     flex: 1;
 }
+
+.header__controls {
+    display: flex;
+}
+
+.header__controls .btn {
+    width: 280px;
+    margin-left: 20px;
+    font-size: 16px;
+    line-height: 14px;
+}
 </style>

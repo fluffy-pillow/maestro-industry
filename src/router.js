@@ -7,6 +7,8 @@ import Login from './pages/Login';
 import Items from './pages/Items';
 import CategoryId from './pages/Items/_CategoryId/Index';
 import Manual from './pages/Items/_CategoryId/Manual/Index';
+import Exploitation from './pages/Items/_CategoryId/Manual/Exploitation/_ManualSlug/Index';
+import Troubleshooting from './pages/Items/_CategoryId/Manual/Troubleshooting/_ManualSlug/Index';
 
 Vue.use(Router);
 
@@ -76,6 +78,27 @@ const router = new Router({
                                 onsNavigatorOptions: {animation: 'slide', animationOptions: { duration: 0.2 }}
                             },
 //            beforeEnter: ifAuthenticated,
+                            children: [
+                                {
+                                    path: 'exploitation/:manualSlug',
+                                    name: 'Exploitation',
+                                    component: {
+                                        extends: Exploitation,
+                                        onsNavigatorOptions: {animation: 'slide', animationOptions: { duration: 0.2 }}
+                                    },
+//                                  beforeEnter: ifAuthenticated,
+                                },
+                                {
+                                    path: 'troubleshooting',
+                                    name: 'Troubleshooting',
+                                    component: {
+                                        extends: Troubleshooting,
+                                        onsNavigatorOptions: {animation: 'slide', animationOptions: { duration: 0.2 }}
+                                    },
+//                                  beforeEnter: ifAuthenticated,
+                                }
+                            ]
+
                         }
                     ]
                 }
