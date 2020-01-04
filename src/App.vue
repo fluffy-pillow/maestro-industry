@@ -16,6 +16,9 @@ export default {
   components: {
       SystemMessage,
       Navigation
+  },
+  mounted () {
+      console.log('is wkWebView:', this.$ons.platform.isWKWebView())
   }
 }
 </script>
@@ -326,6 +329,19 @@ export default {
     border-top-right-radius: 16px;
     display: flex;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portlet:before {
+    position: absolute;
+    top: 0;
+    content: "";
+    height: 60px;
+    background: rgb(255,255,255);
+    background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%);
+    width: 100%;
+    z-index: 1;
   }
 
   .default-image img {
