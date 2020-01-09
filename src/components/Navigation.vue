@@ -1,5 +1,5 @@
 <template>
-    <v-ons-navigator swipeable swipe-target-width="200px"
+    <v-ons-navigator
                      :page-stack="pageStack"
                      :pop-page="goBack"
     ></v-ons-navigator>

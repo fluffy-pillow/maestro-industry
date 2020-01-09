@@ -15,7 +15,7 @@
                    type="video/mp4"
             >
             </video>
-            <p class="troubleshooting-item__text">
+            <p class="troubleshooting-item__text" v-if="item.text">
                 {{item.text}}
             </p>
         </div>

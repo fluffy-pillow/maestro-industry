@@ -50,7 +50,7 @@
                                                     </defs>
                                                     </svg>
                                                 </span>
-                                                <span class="btn__text">
+                                                <span class="btn__text" @click="callMaster">
                                                     Вызвать мастера
                                                 </span>
                                             </button>
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
     import Logo from "@/components/Logo";
     import Header from "@/components/Header";
     import Aside from "@/components/Aside";
@@ -93,6 +94,14 @@
                     },
                 ]
             }
+        },
+        methods: {
+            ...mapActions({
+                popup: 'popup/popup'
+            }),
+            callMaster () {
+                this.popup({icon: 'repair.svg', text: 'Сообщение мастеру успешно отправлено!'})
+            },
         }
     }
 </script>

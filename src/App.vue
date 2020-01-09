@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <v-ons-page class="main-page">
+      <Popup></Popup>
       <SystemMessage></SystemMessage>
       <Navigation></Navigation>
     </v-ons-page>
@@ -11,9 +12,11 @@
 
 import Navigation from "./components/Navigation";
 import SystemMessage from "./components/SystemMessage";
+import Popup from "./components/Popup";
 export default {
   name: 'app',
   components: {
+      Popup,
       SystemMessage,
       Navigation
   },
