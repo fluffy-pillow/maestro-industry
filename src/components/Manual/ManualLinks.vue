@@ -43,7 +43,7 @@
     border-top-right-radius: 16px;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
-    border-top-left-radius: 8px;
+    border-top-left-radius: 4px;
     flex-direction: column;
 }
 

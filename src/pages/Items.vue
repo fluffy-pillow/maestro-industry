@@ -2,6 +2,7 @@
     <v-ons-page class="items-page">
         <div class="grid">
             <Header>
+                <v-ons-back-button slot="headerLeft">Назад</v-ons-back-button>
                 <Logo slot="headerCenter"></Logo>
             </Header>
             <main class="main-container">
@@ -10,7 +11,7 @@
                         <div class="portlet">
                             <div class="portlet-container scrollable-y scrollable-hide-scroll">
                                 <div class="portlet-header">
-                                    <h2>Выберите оборудование</h2>
+                                    <h2>Выберите категорию</h2>
                                 </div>
                                 <div class="portlet-body">
                                     <section class="portlet-section">
@@ -41,6 +42,26 @@
                                     <section class="portlet-section">
                                         <div class="portlet-section-header">
                                             <h3>Оборудование для обработки металла резанием</h3>
+                                        </div>
+                                        <div class="portlet-section-body">
+                                            <div class="flexible-table flexible-table__horizontal-items">
+                                                <div class="flexible-table-content">
+                                                    <router-link class="flexible-table__col link"
+                                                                 v-for="(item, key) of items"
+                                                                 :key="key"
+                                                                 to="/items/1"
+                                                    >
+                                                        <div class="flexible-table__col-content">
+                                                            <div class="flexible-table__image">
+                                                                <img :src="require('@/assets/uploads/item.png')">
+                                                            </div>
+                                                            <div class="flexible-table__title">
+                                                                {{item.title}}
+                                                            </div>
+                                                        </div>
+                                                    </router-link>
+                                                </div>
+                                            </div>
                                         </div>
                                     </section>
                                 </div>

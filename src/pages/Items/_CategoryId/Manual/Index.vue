@@ -33,6 +33,28 @@
                                 <div class="portlet-body">
                                     <section class="portlet-section">
                                         <ManualLinks :links="links"></ManualLinks>
+
+                                        <div class="category-item">
+                                            <button class="btn btn-warning">
+                                                <span class="btn__icon">
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <g clip-path="url(#clip0)">
+                                                    <path d="M23.6174 18.5334L14.444 2.64455C13.9339 1.76105 13.0203 1.23352 12 1.23352C10.9798 1.23352 10.0661 1.76105 9.55597 2.64455L0.382605 18.5333C-0.127535 19.4169 -0.127535 20.4719 0.382605 21.3554C0.892744 22.239 1.80634 22.7664 2.82662 22.7664H21.1734C22.1936 22.7664 23.1072 22.2389 23.6174 21.3555C24.1276 20.4719 24.1276 19.4169 23.6174 18.5334ZM22.3997 20.6524C22.1437 21.0958 21.6853 21.3604 21.1734 21.3604H2.82662C2.31465 21.3604 1.85621 21.0958 1.60027 20.6524C1.34434 20.2091 1.34434 19.6798 1.60027 19.2364L10.7737 3.34763C11.0297 2.90428 11.4881 2.63963 12 2.63963C12.5119 2.63963 12.9704 2.90428 13.2263 3.34763L22.3997 19.2364C22.6556 19.6798 22.6556 20.2091 22.3997 20.6524Z" fill="black"/>
+                                                    <path d="M12.7029 8.25049H11.2969V15.2809H12.7029V8.25049Z" fill="black"/>
+                                                    <path d="M12 16.687C11.4831 16.687 11.0626 17.1075 11.0626 17.6244C11.0626 18.1413 11.4831 18.5618 12 18.5618C12.5169 18.5618 12.9374 18.1413 12.9374 17.6244C12.9374 17.1075 12.5169 16.687 12 16.687Z" fill="black"/>
+                                                    </g>
+                                                    <defs>
+                                                    <clipPath id="clip0">
+                                                    <rect width="24" height="24" fill="white"/>
+                                                    </clipPath>
+                                                    </defs>
+                                                    </svg>
+                                                </span>
+                                                <span class="btn__text">
+                                                    Вызвать мастера
+                                                </span>
+                                            </button>
+                                        </div>
                                     </section>
                                 </div>
                             </div>
@@ -76,5 +98,13 @@
 </script>
 
 <style scoped>
+.category-item {
+    margin-top: 44px;
+    display: flex;
+    justify-content: center;
+}
 
+.category-item .btn {
+    width: 280px;
+}
 </style>

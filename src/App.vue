@@ -86,7 +86,7 @@ export default {
   }
 
   .flexible-table-content {
-    width: 100%;
+    width: calc(100% + 30px);
     flex-wrap: wrap;
     display: flex;
   }
@@ -325,8 +325,8 @@ export default {
 
   .portlet {
     background: #FFFFFF;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
     display: flex;
     width: 100%;
     position: relative;
@@ -342,6 +342,8 @@ export default {
     background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5) 70%, rgba(255,255,255,0) 100%);
     width: 100%;
     z-index: 1;
+    border-top-left-radius: 32px;
+    border-top-right-radius: 32px;
   }
 
   .default-image img {
@@ -356,6 +358,7 @@ export default {
 
   .portlet-offset {
     margin-left: 32px;
+    padding-bottom: 32px;
   }
 
   .aside ~ .grid-item__col {

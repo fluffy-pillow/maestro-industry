@@ -2,7 +2,7 @@
     <v-ons-page class="category-page">
         <div class="grid">
             <Header>
-                <v-ons-back-button slot="headerLeft">Назад</v-ons-back-button>
+                <v-ons-back-button slot="headerLeft">Выбрать категорию</v-ons-back-button>
                 <Logo slot="headerCenter"></Logo>
             </Header>
             <main class="main-container">

@@ -4,7 +4,7 @@
             <Header>
                 <v-ons-back-button slot="headerLeft">Назад</v-ons-back-button>
                 <div class="header__controls" slot="headerRight">
-                    <button class="btn btn-purple" @click="$router.push('/items')">
+                    <button class="btn btn-purple" @click="$router.push('/items/1')">
                         <span class="btn__icon">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.81 1.26001C10.81 0.98376 10.5863 0.76001 10.31 0.76001H1.26001C0.98376 0.76001 0.76001 0.98376 0.76001 1.26001V10.31C0.76001 10.5863 0.98376 10.81 1.26001 10.81H10.31C10.5863 10.81 10.81 10.5863 10.81 10.31V1.26001ZM9.81001 9.81001H1.76001V1.76001H9.81001V9.81001Z" fill="white"/>

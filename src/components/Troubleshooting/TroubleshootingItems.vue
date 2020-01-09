@@ -48,7 +48,7 @@
 
 <style scoped>
     .troubleshooting-item {
-        margin-top: 16px;
+        margin-bottom: 16px;
         position: relative;
     }
 
