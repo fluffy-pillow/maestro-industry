@@ -36,7 +36,7 @@ export default {
       },
       idleTimer () {
           window.onclick = this.resetTimer;
-          window.onscroll = this.resetTimer;
+          window.ontouchstart = this.resetTimer;
       }
   },
   mounted () {
