@@ -17,24 +17,26 @@
             </button>
         </template>
         <template v-else>
-            <template v-if="item.dialog">
-                <button class="btn btn-neutral">
-                    {{item.dialog[0]}}
+            <template v-if="currentInstructionItem.dialog">
+                <button class="btn btn-neutral" @click="nextStep('no')">
+                    {{currentInstructionItem.dialog.no}}
                 </button>
-                <button class="btn btn-grey btn-grey-glow">
-                    {{item.dialog[1]}}
+                <button class="btn btn-grey btn-grey-glow" @click="nextStep('yes')">
+                    {{currentInstructionItem.dialog.yes}}
                 </button>
             </template>
             <template v-else>
-                <button class="btn btn-neutral"
-                        v-if="instructionStepId > 1"
-                        @click="prevStep"
-                >
-                    Предыдущий шаг
-                </button>
-                <button class="btn btn-grey btn-grey-glow" @click="nextStep">
-                    Следующий шаг
-                </button>
+                <template v-if="(!currentInstructionItem.condition || !currentInstructionItem.condition === 'no')">
+                    <button class="btn btn-neutral"
+                            v-if="instructionStepId > 1"
+                            @click="prevStep"
+                    >
+                        Предыдущий шаг
+                    </button>
+                    <button class="btn btn-grey btn-grey-glow" @click="nextStep">
+                        Следующий шаг
+                    </button>
+                </template>
             </template>
         </template>
     </div>
@@ -51,12 +53,13 @@
                 type: Boolean,
                 default: false
             },
-            item: {
+            currentInstructionItem: {
                 type: Object,
                 default: () => {
                     return {dialog: null}
                 }
-            }
+            },
+            currentInstruction: Array
         },
         methods: {
             ...mapActions({
@@ -65,7 +68,7 @@
             callMaster () {
                 this.popup({icon: 'repair.svg', text: 'Сообщение мастеру успешно отправлено!'})
             },
-            nextStep () {
+            nextStep (answer = null) {
                 if (!this.lastStep) {
                     this.$emit('update:instruction-step-id', this.instructionStepId + 1)
                 }

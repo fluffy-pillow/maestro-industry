@@ -10,7 +10,8 @@
             </div>
             <video class="troubleshooting-item__video"
                    v-if="item.video"
-                   :src="item.video"
+                   :src="item.video.src"
+                   :poster="item.video.poster"
                    width="100%" height="100%" controls="controls"
                    type="video/mp4"
             >
