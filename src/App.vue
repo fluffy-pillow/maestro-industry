@@ -20,8 +20,28 @@ export default {
       SystemMessage,
       Navigation
   },
+  data () {
+      return {
+          timerId: null
+      }
+  },
+  methods: {
+      resetTimer() {
+          console.log('reset')
+          clearTimeout(this.timerId)
+          this.timerId = setTimeout(this.logout, 30000);
+      },
+      logout () {
+          this.$router.push('/login')
+      },
+      idleTimer () {
+          window.onclick = this.resetTimer;
+          window.onscroll = this.resetTimer;
+      }
+  },
   mounted () {
       console.log('is wkWebView:', this.$ons.platform.isWKWebView())
+      this.idleTimer()
   }
 }
 </script>
@@ -217,6 +237,8 @@ export default {
     background-color: transparent;
   }
 
+
+
   .login-page > .page__content, .login-page > .page__background {
     background: #FBFBFB !important;
   }
@@ -387,11 +409,14 @@ export default {
   .scrollable-y {
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: none;
 /*    padding-bottom: env(safe-area-inset-top);*/
   }
 
   .scrollable-hide-scroll::-webkit-scrollbar {
     display: none;
+    width: 0;
+    height: 0;
   }
 
   .scrollable-hide-scroll::-webkit-scrollbar-track {

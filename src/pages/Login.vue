@@ -1,8 +1,8 @@
 <template>
     <v-ons-page class="login-page">
         <div class="grid">
-            <main class="main-container">
-                <div class="login-wrapper scrollable-y scrollable-hide-scroll">
+            <main class="main-container scrollable-y scrollable-hide-scroll">
+                <div class="login-wrapper">
                     <div class="login-container">
                         <div class="logo">
                             <svg width="294" height="36" viewBox="0 0 294 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +94,7 @@
             },
             onSubmit () {
                 let password = this.password.filter((value) => value > -1).join('')
-                if (password !== '1111') {
+                if (password !== '1234') {
                     this.systemMessage(
                         {
                             type: 'error',

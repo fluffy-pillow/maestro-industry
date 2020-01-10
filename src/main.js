@@ -29,12 +29,8 @@ const app = new Vue({
   router,
   render: h => h(App),
   mounted() {
-      document.addEventListener('deviceReady', this.onDeviceReady, false)
   },
   methods: {
-      onDeviceReady() {
-
-      }
   },
   beforeCreate() {
     this.$ons.disableAutoStyling();
