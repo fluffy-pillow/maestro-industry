@@ -26,7 +26,7 @@
                 </button>
             </template>
             <template v-else>
-                <template v-if="(!currentInstructionItem.condition || !currentInstructionItem.condition === 'no')">
+                <template v-if="(!currentInstructionItem.condition || !currentInstructionItem.condition === 'yes')">
                     <button class="btn btn-neutral"
                             v-if="instructionStepId > 1"
                             @click="prevStep"
@@ -69,8 +69,14 @@
                 this.popup({icon: 'repair.svg', text: 'Сообщение мастеру успешно отправлено!'})
             },
             nextStep (answer = null) {
-                if (!this.lastStep) {
-                    this.$emit('update:instruction-step-id', this.instructionStepId + 1)
+                if (!this.currentInstructionItem.dialog) {
+                    if (!this.lastStep) {
+                        this.$emit('update:instruction-step-id', this.instructionStepId + 1)
+                    }
+                } else {
+                    this.$emit('update:instruction-step-id', this.currentInstruction.findIndex(item =>
+                        answer === item.condition && this.instructionStepId === item.from
+                    ) + 1)
                 }
             },
             prevStep () {
