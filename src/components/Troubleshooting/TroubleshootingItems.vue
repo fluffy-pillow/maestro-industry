@@ -1,9 +1,9 @@
 <template>
     <div class="troubleshooting-items">
         <div class="troubleshooting-item"
-             v-for="(item, key) of computedItems"
+             v-for="(item, key) of instruction"
              :key="key"
-             :class="{'troubleshooting-item-completed': key < instructionStepId - 1}"
+             :class="{'troubleshooting-item-completed': (!end) ? key < instruction.length - 1: true}"
         >
             <div class="troubleshooting-item__title">
                 {{item.title}}
@@ -27,23 +27,10 @@
     export default {
         name: "TroubleshootingItems",
         props: {
-            items: Array,
+            instruction: Array,
             instructionStepId: Number,
-            lastStep: {
-                type: Boolean,
-                default: false
-            }
-        },
-        computed: {
-            computedItems () {
-                let count = (!this.lastStep) ? this.instructionStepId : this.items.length
-                let ret = []
-                for (let i = 0; i < count; i++) {
-                    ret.push(this.items[i])
-                }
-                return ret
-            }
-        },
+            end: Boolean
+        }
     }
 </script>
 

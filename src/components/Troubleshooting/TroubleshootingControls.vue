@@ -1,6 +1,6 @@
 <template>
     <div class="troubleshooting-controls">
-        <template v-if="lastStep">
+        <template v-if="end">
             <button class="btn btn-grey btn-grey-glow">
                 Готово
             </button>
@@ -18,48 +18,39 @@
         </template>
         <template v-else>
             <template v-if="currentInstructionItem.dialog">
-                <button class="btn btn-neutral" @click="nextStep('no')">
-                    {{currentInstructionItem.dialog.no}}
+                <button class="btn btn-neutral" @click="changeInstructionItem(currentInstructionItem.dialog.no.key)">
+                    {{currentInstructionItem.dialog.no.text}}
                 </button>
-                <button class="btn btn-grey btn-grey-glow" @click="nextStep('yes')">
-                    {{currentInstructionItem.dialog.yes}}
+                <button class="btn btn-grey btn-grey-glow" @click="changeInstructionItem(currentInstructionItem.dialog.yes.key)">
+                    {{currentInstructionItem.dialog.yes.text}}
                 </button>
             </template>
-            <template v-else>
-                <template v-if="(!currentInstructionItem.condition || !currentInstructionItem.condition === 'yes')">
-                    <button class="btn btn-neutral"
-                            v-if="instructionStepId > 1"
-                            @click="prevStep"
-                    >
-                        Предыдущий шаг
-                    </button>
-                    <button class="btn btn-grey btn-grey-glow" @click="nextStep">
-                        Следующий шаг
-                    </button>
-                </template>
+            <template v-if="currentInstructionItem.to || currentInstructionItem.last">
+                <button class="btn btn-neutral" v-if="hasPreviousRecordedItem" @click="prevInstructionItem">
+                    Предыдущий шаг
+                </button>
+                <button class="btn btn-grey btn-grey-glow" @click="nextInstructionItem">
+                    Следующий шаг
+                </button>
             </template>
         </template>
     </div>
 </template>
-
 <script>
     import {mapActions} from 'vuex'
 
     export default {
         name: "TroubleshootingControls",
         props: {
-            instructionStepId: Number,
-            lastStep: {
-                type: Boolean,
-                default: false
-            },
+            hasPreviousRecordedItem: Boolean,
+            instruction: Array,
+            end: Boolean,
             currentInstructionItem: {
                 type: Object,
                 default: () => {
                     return {dialog: null}
                 }
-            },
-            currentInstruction: Array
+            }
         },
         methods: {
             ...mapActions({
@@ -68,21 +59,20 @@
             callMaster () {
                 this.popup({icon: 'repair.svg', text: 'Сообщение мастеру успешно отправлено!'})
             },
-            nextStep (answer = null) {
-                if (!this.currentInstructionItem.dialog) {
-                    if (!this.lastStep) {
-                        this.$emit('update:instruction-step-id', this.instructionStepId + 1)
-                    }
+            prevInstructionItem () {
+                this.$emit('flipThrough', {direction: 'back'})
+            },
+            nextInstructionItem () {
+                if (!this.currentInstructionItem.last) {
+                    this.$emit('flipThrough', {to: this.currentInstructionItem.to, direction: 'forward'})
                 } else {
-                    this.$emit('update:instruction-step-id', this.currentInstruction.findIndex(item =>
-                        answer === item.condition && this.instructionStepId === item.from
-                    ) + 1)
+                    this.$emit('update:end', true)
                 }
             },
-            prevStep () {
-                this.$emit('update:instruction-step-id', this.instructionStepId - 1)
+            changeInstructionItem(to) {
+                this.$emit('flipThrough', {to: to, direction: 'forward'})
             }
-        },
+        }
     }
 </script>
 

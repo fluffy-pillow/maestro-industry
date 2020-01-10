@@ -65,19 +65,21 @@
                                         <section class="portlet-section">
                                             <div class="portlet-offset">
                                                 <TroubleshootingItems
-                                                        :items="currentInstruction"
-                                                        :instruction-step-id="instructionStepId"
-                                                        :last-step="bLastInstructionStep"
+                                                    :instruction="recordedInstruction"
+                                                    :instruction-item-key="instructionItemKey"
+                                                    :end="end"
                                                 >
                                                 </TroubleshootingItems>
-                                                <div class="message message-success" v-if="bLastInstructionStep">
+                                                <div class="message message-success" v-if="end">
                                                     Устранение неисправности завершено. В случае, если неисправность осталась - вызовите мастера.
                                                 </div>
-                                                <TroubleshootingControls
-                                                        :instruction-step-id.sync="instructionStepId"
-                                                        :last-step="bLastInstructionStep"
-                                                        :current-instruction-item="currentInstructionItem"
-                                                        :current-instruction="currentInstruction"
+                                               <TroubleshootingControls
+                                                  :has-previous-recorded-item="recordedInstruction.length > 1"
+                                                  :instruction="recordedInstruction"
+                                                  :current-instruction-item="currentInstructionItem"
+                                                  :instruction-item-key.sync="instructionItemKey"
+                                                  :end.sync="end"
+                                                  @flipThrough="onFlipThrough"
                                                 >
                                                 </TroubleshootingControls>
                                             </div>
@@ -104,7 +106,10 @@
         components: {TroubleshootingControls, TroubleshootingItems, Header, Aside, AsideMenu},
         data () {
             return {
-                instructionStepId: 1,
+                instructionItemKey: 'key_1',
+                recordedInstruction: [],
+                direction: 'forward',
+                end: false,
                 asideLinks: [
                     {
                         title: 'Головка ЧПУ перестала работать во время производства',
@@ -136,24 +141,27 @@
                         link: 'manual-1',
                         instruction: [
                             {
-                                id: 1,
+                                key: 'key_1',
                                 title: 'Проверьте модули монтажной панели',
                                 text: 'На дверце шкафа размещены элементы управления и индикации, обслуживающие их модули ввода-вывода и гнездо для подключения устройства Минипульт Ex.\n' +
-                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.'
+                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.',
+                                to: 'key_2'
                             },
                             {
-                                id: 2,
+                                key: 'key_2',
                                 title: 'Проверьте целостность кабелей',
-                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.'
+                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.',
+                                to: 'key_3'
                             },
                             {
-                                id: 3,
+                                key: 'key_3',
                                 title: 'Проверьте питание источников',
                                 text: 'Шкаф может получать питание от источников искробезопасного питания (ExUPS-PW, ExRPW), устанавливаемых в непосредственной близости.',
                                 video: {
                                     src: 'http://techslides.com/demos/sample-videos/small.mp4',
                                     poster: 'https://www.vegascreativesoftware.com/fileadmin/user_upload/products/vegas_post/1/vegas_image/vegas-image-luminence-key-a-int.jpg'
-                                }
+                                },
+                                last: true
                             }
                         ]
                     },
@@ -161,32 +169,29 @@
                         link: 'manual-2',
                         instruction: [
                             {
-                                id: 1,
+                                key: 'key_1',
                                 title: 'Проверьте модули монтажной панели',
                                 text: 'На дверце шкафа размещены элементы управления и индикации, обслуживающие их модули ввода-вывода и гнездо для подключения устройства Минипульт Ex.\n' +
-                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.'
+                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.',
+                                to: 'key_2'
                             },
                             {
-                                id: 2,
+                                key: 'key_2',
                                 title: 'Красная лампочка горит на панели?',
                                 dialog: {
-                                    no: 'Нет, не горит',
-                                    yes: 'Да, горит'
-                                }
+                                    no: {text: 'Нет, не горит', key: 'key_4'},
+                                    yes: {text: 'Да, горит', key: 'key_3'}
+                                },
                             },
                             {
-                                id: 3,
-                                condition: 'yes',
-                                from: 2,
                                 title: 'Лампочка горит, отлично',
-                                text: 'Проверка завершена успешно'
+                                text: 'Проверка завершена успешно',
+                                key: 'key_3'
                             },
                             {
-                                id: 3,
-                                condition: 'no',
-                                from: 2,
                                 title: 'Лампочка не горит',
-                                text: 'Замените лампочку'
+                                text: 'Замените лампочку',
+                                key: 'key_4'
                             }
                         ]
                     },
@@ -194,24 +199,27 @@
                         link: 'manual-3',
                         instruction: [
                             {
-                                id: 1,
+                                key: 'key_1',
                                 title: 'Проверьте модули монтажной панели',
                                 text: 'На дверце шкафа размещены элементы управления и индикации, обслуживающие их модули ввода-вывода и гнездо для подключения устройства Минипульт Ex.\n' +
-                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.'
+                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.',
+                                to: 'key_2'
                             },
                             {
-                                id: 2,
+                                key: 'key_2',
                                 title: 'Проверьте целостность кабелей',
-                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.'
+                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.',
+                                to: 'key_3'
                             },
                             {
-                                id: 3,
+                                key: 'key_3',
                                 title: 'Проверьте питание источников',
                                 text: 'Шкаф может получать питание от источников искробезопасного питания (ExUPS-PW, ExRPW), устанавливаемых в непосредственной близости.',
                                 video: {
                                     src: 'http://techslides.com/demos/sample-videos/small.mp4',
                                     poster: 'https://www.vegascreativesoftware.com/fileadmin/user_upload/products/vegas_post/1/vegas_image/vegas-image-luminence-key-a-int.jpg'
-                                }
+                                },
+                                last: true
                             }
                         ]
                     },
@@ -219,24 +227,27 @@
                         link: 'manual-4',
                         instruction: [
                             {
-                                id: 1,
+                                key: 'key_1',
                                 title: 'Проверьте модули монтажной панели',
                                 text: 'На дверце шкафа размещены элементы управления и индикации, обслуживающие их модули ввода-вывода и гнездо для подключения устройства Минипульт Ex.\n' +
-                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.'
+                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.',
+                                to: 'key_2'
                             },
                             {
-                                id: 2,
+                                key: 'key_2',
                                 title: 'Проверьте целостность кабелей',
-                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.'
+                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.',
+                                to: 'key_3'
                             },
                             {
-                                id: 3,
+                                key: 'key_3',
                                 title: 'Проверьте питание источников',
                                 text: 'Шкаф может получать питание от источников искробезопасного питания (ExUPS-PW, ExRPW), устанавливаемых в непосредственной близости.',
                                 video: {
                                     src: 'http://techslides.com/demos/sample-videos/small.mp4',
                                     poster: 'https://www.vegascreativesoftware.com/fileadmin/user_upload/products/vegas_post/1/vegas_image/vegas-image-luminence-key-a-int.jpg'
-                                }
+                                },
+                                last: true
                             }
                         ]
                     },
@@ -244,24 +255,27 @@
                         link: 'manual-5',
                         instruction: [
                             {
-                                id: 1,
+                                key: 'key_1',
                                 title: 'Проверьте модули монтажной панели',
                                 text: 'На дверце шкафа размещены элементы управления и индикации, обслуживающие их модули ввода-вывода и гнездо для подключения устройства Минипульт Ex.\n' +
-                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.'
+                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.',
+                                to: 'key_2'
                             },
                             {
-                                id: 2,
+                                key: 'key_2',
                                 title: 'Проверьте целостность кабелей',
-                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.'
+                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.',
+                                to: 'key_3'
                             },
                             {
-                                id: 3,
+                                key: 'key_3',
                                 title: 'Проверьте питание источников',
                                 text: 'Шкаф может получать питание от источников искробезопасного питания (ExUPS-PW, ExRPW), устанавливаемых в непосредственной близости.',
                                 video: {
                                     src: 'http://techslides.com/demos/sample-videos/small.mp4',
                                     poster: 'https://www.vegascreativesoftware.com/fileadmin/user_upload/products/vegas_post/1/vegas_image/vegas-image-luminence-key-a-int.jpg'
-                                }
+                                },
+                                last: true
                             }
                         ]
                     },
@@ -269,29 +283,67 @@
                         link: 'manual-6',
                         instruction: [
                             {
-                                id: 1,
+                                key: 'key_1',
                                 title: 'Проверьте модули монтажной панели',
                                 text: 'На дверце шкафа размещены элементы управления и индикации, обслуживающие их модули ввода-вывода и гнездо для подключения устройства Минипульт Ex.\n' +
-                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.'
+                                'Кабель внешнего питания (230В/127В/36В) следует подводить к нижней стенке шкафа, пропускать через кабельный ввод шкафа, закреплять от выдергивания имеющимися зажимами и подключать на клеммник внешней вводной короб- ки.',
+                                to: 'key_2'
                             },
                             {
-                                id: 2,
+                                key: 'key_2',
                                 title: 'Проверьте целостность кабелей',
-                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.'
+                                text: 'Кабели вводятся в шкаф со стороны нижней стенки шкафа через кабельные вводы и закрепляются от выдергивания имеющимися на терминальных кассетах зажимами. Конструкция шкафа позволяет отсоединять кабели вместе с за- крепленными на них терминальными кассетами.',
+                                to: 'key_3'
                             },
                             {
-                                id: 3,
+                                key: 'key_3',
                                 title: 'Проверьте питание источников',
                                 text: 'Шкаф может получать питание от источников искробезопасного питания (ExUPS-PW, ExRPW), устанавливаемых в непосредственной близости.',
                                 video: {
                                     src: 'http://techslides.com/demos/sample-videos/small.mp4',
                                     poster: 'https://www.vegascreativesoftware.com/fileadmin/user_upload/products/vegas_post/1/vegas_image/vegas-image-luminence-key-a-int.jpg'
-                                }
+                                },
+                                last: true
                             }
                         ]
                     },
                 ]
             }
+        },
+        watch: {
+            '$route': function (newValue) {
+                this.instructionItemKey = 'key_1'
+                this.end = false
+                this.clear()
+                this.record()
+                this.$refs.scrollableBlock.scrollTop = 0
+            },
+            instructionItemKey: function (newValue, oldValue) {
+                this.$refs.scrollableBlock.scrollTop = this.$refs.scrollableBlock.scrollHeight
+            }
+        },
+        methods: {
+           record () {
+               this.recordedInstruction.push(this.currentInstructionItem)
+           },
+           clear () {
+               this.recordedInstruction = []
+           },
+           cancel () {
+               this.recordedInstruction.pop()
+           },
+           onFlipThrough (args) {
+               if (args.direction === 'forward') {
+                   this.instructionItemKey = args.to
+                   this.direction = args.direction
+                   this.record()
+               } else {
+                   this.cancel()
+                   this.instructionItemKey = this.recordedInstruction[this.recordedInstruction.length - 1].key
+                   this.direction = args.direction
+               }
+
+           }
         },
         computed: {
             currentInstruction () {
@@ -299,25 +351,7 @@
                 return (step.length > 0) ? step[0].instruction : []
             },
             currentInstructionItem () {
-                return this.currentInstruction.filter(item => this.instructionStepId === item.id)[0]
-            },
-            lastInstructionItem () {
-                return this.currentInstruction.filter(item => this.instructionStepId - 1 === item.id)[0]
-            },
-            bLastInstructionStep () {
-                return this.instructionStepId === this.currentInstruction.length + 1
-            },
-        },
-        watch: {
-            '$route': function (newValue) {
-                this.$refs.scrollableBlock.scrollTop = 0
-                this.instructionStepId = 1
-            },
-            instructionStepId: function (newValue) {
-                this.$nextTick(() => {
-                    this.$refs.scrollableBlock.scrollTop = this.$refs.scrollableBlock.scrollHeight
-                })
-
+                return this.currentInstruction.filter(item => this.instructionItemKey === item.key)[0]
             }
         }
      }
